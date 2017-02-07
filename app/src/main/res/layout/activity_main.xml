@@ -13,11 +13,20 @@
         android:paddingTop="16dp"
         android:paddingLeft="8dp">
 
+        <EditText
+            android:id="@+id/name_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/name_field"
+            android:paddingBottom="16dp"
+            android:textAllCaps="false"
+            android:textSize="18sp"/>
+
         <TextView
             android:id="@+id/toppings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/toppings"
             android:textAllCaps="true"
             android:textSize="16sp" />
@@ -31,6 +40,7 @@
             android:checked="false"
             android:paddingLeft="24dp"
             android:text="@string/Whipped"
+            android:textSize="16sp"
             android:textAllCaps="true" />
 
         <CheckBox
@@ -39,6 +49,7 @@
             android:layout_height="wrap_content"
             android:text="@string/chocolate"
             android:paddingLeft="24dp"
+            android:textSize="16sp"
             android:textAllCaps="true"/>
 
         <TextView

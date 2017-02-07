@@ -7,6 +7,8 @@
     <string name="order_summary">Order Summary</string>
     <string name="price_display">0</string>
 
+    <string name="name_field">Name</string>
+
     <!--Toppings and such -->
     <string name="toppings">Toppings</string>
     <string name="Whipped">Whipped Cream</string>

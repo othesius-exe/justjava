@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 /**
@@ -34,16 +35,26 @@ public class MainActivity extends AppCompatActivity {
 
     public String createOrderSummary() {
         int price = calculatePrice();
+        String name = getName();
         boolean hasWhippedCream = whippedCream();
         boolean hasChocolateSauce = chocolateSauce();
-        String name = "Name: Kaptain Kunal" + "\n";
-        String topping = "Has whipped cream? " + hasWhippedCream +"\n" + "Has Chocolate Drizzle? " + hasChocolateSauce + "\n";
-        String purchased = "Quantity: " + quantity + "\n";
-        String priceMessage = "Total: $" + price + "\nThank You!";
-        String orderSummary = name + topping + purchased + priceMessage;
+        String priceMessage = "Order name " + name;
+        priceMessage += "\nAdd whipped cream? " + hasWhippedCream;
+        priceMessage += "\nAdd chocolate? " + hasChocolateSauce;
+        priceMessage += "\nQuantity: " + quantity;
+        priceMessage += "\nTotal: $" + price;
+        priceMessage += "\nThank you!";
+        return priceMessage;
 
-        return orderSummary;
+    }
 
+    /**
+     * @return Will fetch the name from the input field
+     */
+    public String getName() {
+        EditText nameView = (EditText) findViewById(R.id.name_field);
+        String orderName = nameView.getText().toString();
+        return orderName;
     }
 
     /**
