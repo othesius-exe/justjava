@@ -8,17 +8,18 @@
     <LinearLayout
         android:id="@+id/activity_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingTop="16dp"
-        android:paddingLeft="8dp">
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp">
 
         <EditText
             android:id="@+id/name_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/name_field"
-            android:paddingBottom="16dp"
+            android:hint="@string/name_field"
+            android:inputType="textCapWords"
             android:textAllCaps="false"
             android:textSize="18sp"/>
 
@@ -27,6 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            android:layout_marginTop="16dp"
             android:text="@string/toppings"
             android:textAllCaps="true"
             android:textSize="16sp" />

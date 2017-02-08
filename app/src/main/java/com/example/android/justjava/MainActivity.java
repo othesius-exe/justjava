@@ -6,13 +6,14 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
- This app displays an order form to order coffee.
+ * This app displays an order form to order coffee.
  */
 public class MainActivity extends AppCompatActivity {
 
-    int quantity = 0;
+    int quantity = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,24 +22,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     This method is called when the order button is clicked.
-
+     * Calls CreateOrderSummary to create the order summary.
      */
     public void submitOrder(View view) {
         displayMessage(createOrderSummary());
     }
 
     /**
-     *
      * @return orderSummary
      */
-
     public String createOrderSummary() {
-        int price = calculatePrice();
         String name = getName();
         boolean hasWhippedCream = whippedCream();
         boolean hasChocolateSauce = chocolateSauce();
-        String priceMessage = "Order name " + name;
+        int price = calculatePrice(hasWhippedCream, hasChocolateSauce);
+        String priceMessage = "Order name: " + name;
         priceMessage += "\nAdd whipped cream? " + hasWhippedCream;
         priceMessage += "\nAdd chocolate? " + hasChocolateSauce;
         priceMessage += "\nQuantity: " + quantity;
@@ -58,13 +56,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     *
      * @return state of whipped cream check box
      */
-    public boolean whippedCream(){
+    public boolean whippedCream() {
         CheckBox whippedCream = (CheckBox) findViewById(R.id.whipped_check_box);
         return whippedCream.isChecked();
     }
+
     /**
      * @return state of chocolate check box
      */
@@ -76,28 +74,50 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Calculates the price of the order.
      *
+     * @param hasWhippedCream is whippedCream CheckBox selected
+     * @param hasChocolateSauce is chocolateSauce CheckBox selected
+     * @return totalPrice
      */
-    private int calculatePrice() {
-        return quantity * 5;
+    private int calculatePrice(boolean hasWhippedCream, boolean hasChocolateSauce) {
+        int basePrice = 5;
+        if (hasWhippedCream) {
+            basePrice += 1;
+        }
+        if (hasChocolateSauce) {
+            basePrice += 2;
+        }
+
+        return quantity * basePrice;
     }
 
-    /** This method is called when the + button is clicked.
-
+    /**
+     * This method is called when the + button is clicked.
      */
     public void increment(View view) {
-        quantity = quantity + 1;
-        displayQuantity(quantity);
+        Toast tooMuchCoffee = Toast.makeText(MainActivity.this, "That's a dangerous amount of coffee", Toast.LENGTH_SHORT);
+        if (quantity < 100) {
+            quantity += 1;
+            displayQuantity(quantity);
+        } else {
+            tooMuchCoffee.show();
+        }
     }
 
-    /** This method is called when the - button is clicked
+    /**
+     * This method is called when the - button is clicked
      */
     public void decrement(View view) {
-        quantity = quantity - 1;
-        displayQuantity(quantity);
+        Toast notEnoughCoffee = Toast.makeText(MainActivity.this, "That's not enough coffee", Toast.LENGTH_SHORT);
+        if (quantity > 1) {
+            quantity -= 1;
+            displayQuantity(quantity);
+        } else {
+            notEnoughCoffee.show();
+        }
     }
-    /**
 
-     This method displays the given quantity value on the screen.
+    /**
+     * This method displays the given quantity value on the screen.
      */
     private void displayQuantity(int number) {
         TextView quantityTextView = (TextView) findViewById(
